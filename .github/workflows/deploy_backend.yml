@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    environment: deployTest
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
