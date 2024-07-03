@@ -33,20 +33,9 @@ def write_ans(results):
     print("done!")
 
 
-# def parse_answer(answer):
-#     contents = ""
-#     ans = answer["answer"]
-#     contents += f"{ans}\n"
-#     contents += "Source: \n"
-#     for doc in answer["context"]:
-#         source = doc.metadata["source"]
-#         contents += f"{source}\n"
-#     return contents
-
-
 def parse_answer(answer, metadata):
     content = f"{answer}\n Source: \n"
 
-    for source in metadata:
+    for source in metadata[:3]:
         content += f"{source}\n"
     return content

@@ -36,8 +36,17 @@ def multiqueryChain(retriever, model):
 
 def parse_fusion_results(results):
     content = []
-    metadata = set()
+    source_dict = set()
+    metadata_rank = []
+
     for res in results:
         content.append(res[0].page_content)
-        metadata.add(res[0].metadata["source"])
-    return {"content": content, "metadata": list(metadata)}
+        source = res[0].metadata["source"]
+        if source not in source_dict:
+            source_dict.add(source)
+            if source.startswith("http"):
+                metadata_rank.append(source)
+            else:
+                metadata_rank.append(source.split("/")[-1])
+
+    return {"content": content, "metadata": metadata_rank}
