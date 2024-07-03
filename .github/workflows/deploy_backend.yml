@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  deployment:
+  deploy:
     runs-on: ubuntu-latest
     environment: deployTest
     steps:
