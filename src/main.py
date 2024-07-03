@@ -11,7 +11,7 @@ def main():
     url = f"{config.backend.host}/api/v1/ask"
 
     input_text = input(">>> ")
-    while input_text.lower() != "bye":
+    while input_text.lower() != "bye2":
         data = {"query": input_text.lower()}
         response = requests.post(url=url, json=data, headers={"Content-Type": "application/json"})
         contents = response.text.split("\\n")
