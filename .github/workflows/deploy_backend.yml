@@ -27,5 +27,6 @@ jobs:
         ssh -o StrictHostKeyChecking=no -p $SSH_PORT $SSH_USER@$SSH_HOST << 'EOF'
           cd polyhistor
           git pull origin main
-          
+          ./deploy.sh
+
         EOF
