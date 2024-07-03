@@ -1,0 +1,31 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.POLYHISTOR_PRIVATE_KEY }}
+
+    - name: Deploy to server
+      env:
+        SSH_HOST: ${{ secrets.POLYHISTOR_SSH_HOST }}
+        SSH_USER: ${{ secrets.POLYHISTOR_SSH_USER }}
+        SSH_PORT: ${{ secrets.POLYHISTOR_SSH_PORT }}
+      run: |
+        ssh -o StrictHostKeyChecking=no -p $SSH_PORT $SSH_USER@$SSH_HOST << 'EOF'
+          cd polyhistor
+          git pull origin main
+          
+        EOF
